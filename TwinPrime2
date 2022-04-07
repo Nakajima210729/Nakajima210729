@@ -10,7 +10,7 @@ package twin;
 public class TwinPrime {
 	
 	//ここにNUMを入力↓------------------------------------------------
-	static private final int NUM = 100;
+	static private final int NUM = 10;
 	//-----------------------------------------------------------------
 	
 	public static void main(String[] args) {
@@ -40,7 +40,7 @@ public class TwinPrime {
 			return false;
 		}
 		
-		for(int i = 3; i < Math.sqrt(num); i += 2) {
+		for(int i = 3; i <= (int)Math.sqrt(num); i += 2) {
 			if(num % i == 0) {
 				return false;
 			}
