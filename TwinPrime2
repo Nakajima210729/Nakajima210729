@@ -1,0 +1,50 @@
+/**
+ * NUM以下で最大の双子素数をログで出力するプログラム
+ * 
+ * @author 210729 ToruNakajima
+ * @since 2022/04/07
+ */
+
+package twin;
+
+public class TwinPrime {
+	
+	//ここにNUMを入力↓------------------------------------------------
+	static private final int NUM = 100;
+	//-----------------------------------------------------------------
+	
+	public static void main(String[] args) {
+		
+		for(int i = (NUM % 2 == 0 ? NUM - 1 : NUM); i >= 3; i -= 2) {
+			
+			if(isPrime(i)) {
+				if(isPrime(i-2)) {
+					System.out.println("[結果]" + (i-2) + ", " + i);
+					break;
+				}else {
+					i -= 2;		//(i-2)は合成数だから, 次回は(i-4)から調べる
+				}
+			}
+		}
+	}
+	
+	/**
+	 * numが素数であるかどうかを判定するメソッド
+	 * 
+	 * @param num {int} numの値
+	 * @return numが素数ならばtrue, 合成数や1以下の数ならばfalse
+	 */
+	private static boolean isPrime(int num) {
+		
+		if(num <= 1 || num % 2 == 0) {
+			return false;
+		}
+		
+		for(int i = 3; i < Math.sqrt(num); i += 2) {
+			if(num % i == 0) {
+				return false;
+			}
+		}
+		return true;
+	}
+}
