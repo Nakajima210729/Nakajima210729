@@ -21,7 +21,7 @@ public class DrawCircle {
 		//中身が詰まった円を作る
 		for (int y = 0; y < DIAMETER; y++) {
 			for (int x = 0; x < DIAMETER; x++) {
-				//円の方程式の左辺
+				//円の方程式(x-a)²+(y-b)²=r²　の左辺
 				double leftOfOvalEquation =
 						  Math.pow(x - center_x, 2)
 						+ Math.pow(y - center_y, 2);
@@ -41,7 +41,16 @@ public class DrawCircle {
 			}
 		}
 		
-		//print文で出力
+		//バリを取り除く
+		for (int y = 1; y < DIAMETER - 1; y++) {
+			for (int x = 1; x < DIAMETER - 1; x++) {
+				if (isBurr(x, y)) {
+					areDrawingBorder[y][x] = false;
+				}
+			}
+		}
+		
+		//print文で円を出力
 		for (int y = 0; y < DIAMETER; y++) {
 			for (int x = 0; x < DIAMETER; x++) {
 				if (areDrawingBorder[y][x]) {
@@ -66,4 +75,11 @@ public class DrawCircle {
 		}
 		return true;
 	}
+	
+	//バリである: true | バリでない: false
+	private static boolean isBurr(int x, int y) {
+		return (  (areDrawingBorder[y][x - 1] || areDrawingBorder[y][x + 1])
+			    &&(areDrawingBorder[y - 1][x] || areDrawingBorder[y + 1][x]) );
+	}
+	
 }

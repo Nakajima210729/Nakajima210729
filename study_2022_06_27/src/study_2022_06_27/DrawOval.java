@@ -3,7 +3,7 @@ package study_2022_06_27;
 public class DrawOval {
 	
 	//円の直径・半径
-	private final static int DIAMETER = 40;
+	private final static int DIAMETER = 30;
 	private final static int RADIUS = DIAMETER / 2;
 	
 	//縦横比
@@ -51,7 +51,16 @@ public class DrawOval {
 			}
 		}
 		
-		//print文で出力
+		//バリを取り除く
+		for (int y = 1; y < figureSize_y - 1; y++) {
+			for (int x = 1; x < figureSize_x - 1; x++) {
+				if (isBurr(x, y)) {
+					areDrawingBorder[y][x] = false;
+				}
+			}
+		}
+		
+		//print文で円(楕円)を出力
 		for (int y = 0; y < figureSize_y; y++) {
 			for (int x = 0; x < figureSize_x; x++) {
 				if (areDrawingBorder[y][x]) {
@@ -75,4 +84,11 @@ public class DrawOval {
 		}
 		return true;
 	}
+	
+	//バリである: true | バリでない: false
+	private static boolean isBurr(int x, int y) {
+		return (  (areDrawingBorder[y][x - 1] || areDrawingBorder[y][x + 1])
+			    &&(areDrawingBorder[y - 1][x] || areDrawingBorder[y + 1][x]) );
+	}
+	
 }
